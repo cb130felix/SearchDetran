@@ -18,16 +18,11 @@ import java.util.logging.Logger;
  */
 public class ThreadConexao extends Thread{
     
-        Socket conexao;
-
-    public ThreadConexao() {
-        
-    }
+    Socket conexao=null;
 
     public ThreadConexao(Socket conexao) {
         this.conexao = conexao;
     }
-        
     
     public void run(){
     

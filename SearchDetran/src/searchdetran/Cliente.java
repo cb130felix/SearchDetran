@@ -34,8 +34,8 @@ public class Cliente {
                 if(conectar == 0){
                     
                     System.out.println("Tentando pegar ip...");
-                     IP_servidor = this.descobreServidor();
-                
+                    IP_servidor = this.descobreServidor();
+                    
                 }
                 
                 System.out.println("Consegui");
@@ -77,16 +77,14 @@ public class Cliente {
     }//fim do método de pedir placa    
    
     public InetAddress descobreServidor(){
-    
         
         String broadcast = "255.255.255.255";
-        
-                
                 
         try {
             
             InetAddress endereco = InetAddress.getByName(broadcast);
             DatagramSocket socket = new DatagramSocket();
+            socket.setBroadcast(true);
             
             String pergunta = "quem eh servidor?";
             byte mensagem[] = pergunta.getBytes();
@@ -95,7 +93,7 @@ public class Cliente {
             socket.send(pacote);
             
             DatagramPacket resposta = new DatagramPacket(mensagem,mensagem.length);
-            socket.receive(resposta);
+            socket.receive(resposta); 
             InetAddress IP_servidor = resposta.getAddress();
             
             socket.close();

@@ -23,10 +23,9 @@ public class Servidor {
                 
                 while(true){
                 
-                
                     Socket conexao = servidor.accept();
                     
-                    ThreadConexao t = new ThreadConexao();
+                    ThreadConexao t = new ThreadConexao(conexao);
                     System.out.println("Recebeu uma requisicao!");
                     t.start();
                     
