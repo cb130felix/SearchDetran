@@ -5,16 +5,37 @@
  */
 package Servidor;
 
+import java.net.ServerSocket;
+import java.net.Socket;
+
 /**
  *
  * @author Guto L
  */
 public class Servidor {
     
-    public static void main(){
-    
-        System.out.println("Sou o servidor =]");
-    
-    }
+    public void main(String [] args){
+        
+            try {
+                
+                ServerSocket servidor = new ServerSocket(5000);
+                System.out.println("Servidor Pronto...");
+                
+                while(true){
+                
+                
+                    Socket conexao = servidor.accept();
+                    
+                    ThreadConexao t = new ThreadConexao();
+                    
+                }
+                
+                
+            } catch (Exception e) {
+            }
+            
+            
+        
+        }
     
 }
