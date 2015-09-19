@@ -20,7 +20,7 @@ public class Cliente {
         boolean chek = true;
         boolean trocarIP = false;
         boolean enviar = true;
-        int porta = 5000;// PORTA QUE O SERVIDOR VAI ESCUTAR, BLZ?
+        int porta = 2500;// PORTA QUE O SERVIDOR VAI ESCUTAR, BLZ?
         
     public void pedirPlaca(){
     
@@ -33,10 +33,12 @@ public class Cliente {
         
                 if(conectar == 0){
                     
+                    System.out.println("Tentando pegar ip...");
                      IP_servidor = this.descobreServidor();
                 
                 }
                 
+                System.out.println("Consegui");
                 Socket conexao = new Socket(IP_servidor,this.porta);
                 
                 String placa = "PLA-0000"; // DEPOIS IMPLEMENTA PRA PEGAR DO USUARIO
@@ -48,6 +50,7 @@ public class Cliente {
                 chek = false;
                 
             } catch (Exception e) {
+                System.out.println("Problemas");
                 try {
                     
                    Thread.sleep(3000);
@@ -83,7 +86,7 @@ public class Cliente {
         try {
             
             InetAddress endereco = InetAddress.getByName(broadcast);
-            DatagramSocket socket = new DatagramSocket(this.porta,endereco);
+            DatagramSocket socket = new DatagramSocket();
             
             String pergunta = "quem eh servidor?";
             byte mensagem[] = pergunta.getBytes();
@@ -97,13 +100,14 @@ public class Cliente {
             
             socket.close();
             
+            System.out.println("OK");
             return IP_servidor;
                     
             
             
         } catch (Exception e) {
             e.printStackTrace();
-            
+            System.out.println("fudeu");
         }
             return null;
         

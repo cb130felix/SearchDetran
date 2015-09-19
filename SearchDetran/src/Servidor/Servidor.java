@@ -14,11 +14,11 @@ import java.net.Socket;
  */
 public class Servidor {
     
-    public void main(String [] args){
+    public static void main(String [] args){
         
             try {
                 
-                ServerSocket servidor = new ServerSocket(5000);
+                ServerSocket servidor = new ServerSocket(2500);
                 System.out.println("Servidor Pronto...");
                 
                 while(true){
@@ -27,6 +27,7 @@ public class Servidor {
                     Socket conexao = servidor.accept();
                     
                     ThreadConexao t = new ThreadConexao();
+                    System.out.println("Recebeu uma requisicao!");
                     t.start();
                     
                 }
