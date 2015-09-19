@@ -83,7 +83,7 @@ public class Cliente {
         try {
             
             InetAddress endereco = InetAddress.getByName(broadcast);
-            DatagramSocket socket = new DatagramSocket();
+            DatagramSocket socket = new DatagramSocket(2500, endereco);
             socket.setBroadcast(true);
             
             String pergunta = "quem eh servidor?";
