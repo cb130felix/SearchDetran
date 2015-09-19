@@ -83,13 +83,17 @@ public class Cliente {
         try {
             
             InetAddress endereco = InetAddress.getByName(broadcast);
-            DatagramSocket socket = new DatagramSocket(2500, endereco);
+            DatagramSocket socket = new DatagramSocket();
             socket.setBroadcast(true);
             
             String pergunta = "quem eh servidor?";
             byte mensagem[] = pergunta.getBytes();
             
-            DatagramPacket pacote = new DatagramPacket(mensagem,mensagem.length,endereco,this.porta);
+            InetAddress addr = InetAddress.getByName(broadcast);
+            
+            System.out.println(addr);
+            
+            DatagramPacket pacote = new DatagramPacket(mensagem,mensagem.length,addr,this.porta);
             socket.send(pacote);
             
             DatagramPacket resposta = new DatagramPacket(mensagem,mensagem.length);
@@ -100,7 +104,7 @@ public class Cliente {
             
             System.out.println("OK");
             return IP_servidor;
-                    
+            //return addr;      
             
             
         } catch (Exception e) {
