@@ -27,6 +27,7 @@ public class Servidor {
                     Socket conexao = servidor.accept();
                     
                     ThreadConexao t = new ThreadConexao();
+                    t.start();
                     
                 }
                 
