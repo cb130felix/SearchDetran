@@ -5,6 +5,7 @@
  */
 package searchdetran;
 
+import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.Socket;
@@ -26,7 +27,6 @@ public class Cliente {
              
             Socket conexao;
             
-            // AQUI EU TENHO QUE CHAMAR O MÉTODO QUE DESCOBRE QUEM É SERVIDOR
             
         
             } catch (Exception e) {
@@ -51,12 +51,20 @@ public class Cliente {
         try {
             
             InetAddress endereco = InetAddress.getByName(broadcast);
-            DatagramSocket requisicao = new DatagramSocket(porta,endereco);
+            DatagramSocket socket = new DatagramSocket(porta,endereco);
             
             String pergunta = "quem eh servidor?";
-            byte menssagem[] = pergunta.getBytes();
+            byte mensagem[] = pergunta.getBytes();
             
+            DatagramPacket pacote = new DatagramPacket(mensagem,mensagem.length,endereco,porta);
+            socket.send(pacote);
             
+            DatagramPacket resposta = new DatagramPacket (mensagem,mensagem.length);
+            socket.receive(resposta);
+            InetAddress IP_servidor = resposta.getAddress();
+            
+            socket.close();
+             
             
             
         } catch (Exception e) {
