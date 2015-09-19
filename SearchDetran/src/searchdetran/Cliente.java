@@ -15,33 +15,43 @@ import java.net.Socket;
  * @author Guto L
  */
 public class Cliente {
-    
-    public static void main(String [] args){
-        
+  
         boolean chek = false;
         boolean trocarIP = false;
         boolean enviar = true;
         
-        while(enviar){
+        
+    public void pedirPlaca(){
+    
+        int conectar = 0;
+        
+        while(conectar < 5){
+        
             try {
-             
-            Socket conexao;
-            
-            
-        
+                
+                InetAddress IP_servidor = this.descobreServidor();
+                
+                
             } catch (Exception e) {
-            
-            
+                try {
+                    
+                   Thread.sleep(3000);
+                   conectar++;
+                } catch (Exception e1) {
+                }
+                
+                
             }
-        }//fim do while
+            
+            
+        }// fim do while
         
-       
-       
-    
-    }
-    
-    
-    public void descobreServidor(){
+        
+        
+        
+    }//fim do método de pedir placa    
+   
+    public InetAddress descobreServidor(){
     
         int porta = 5000;
         String broadcast = "255.255.255.255";
@@ -59,18 +69,21 @@ public class Cliente {
             DatagramPacket pacote = new DatagramPacket(mensagem,mensagem.length,endereco,porta);
             socket.send(pacote);
             
-            DatagramPacket resposta = new DatagramPacket (mensagem,mensagem.length);
+            DatagramPacket resposta = new DatagramPacket(mensagem,mensagem.length);
             socket.receive(resposta);
             InetAddress IP_servidor = resposta.getAddress();
             
             socket.close();
-             
+            
+            return IP_servidor;
+                    
             
             
         } catch (Exception e) {
             e.printStackTrace();
             
         }
+            return null;
         
         
     
